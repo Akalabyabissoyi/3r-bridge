@@ -7,7 +7,7 @@
 
 **Choose, preserve and justify the least sentient model that can answer a research question.**
 
-> **Use it now, no install:** download [`3r-path.html`](3r-path.html) (one file, works offline, nothing is sent anywhere) and double-click it. &nbsp;
+> **Use it now, no install:** open [`3r-path.html`](3r-path.html) on GitHub, click the **download icon** (Download raw file, top right of the file), then double-click the saved file. GitHub only shows the page's code, so it must be opened from your computer or from a web host. It is one file, works offline, and nothing is sent anywhere. &nbsp;
 > **Host it:** see [docs/DEPLOY.md](docs/DEPLOY.md) (GitHub Pages serves `docs/index.html`). &nbsp;
 > **Cite:** see [CITATION.cff](CITATION.cff) (Zenodo DOI after the first release).
 
@@ -69,7 +69,7 @@ The Biobank Guide came out of the SLTB 2026 pre-conference mini-symposium at BIO
 
 ## Run it
 
-**Easiest:** open `3r-path.html` in any modern browser. It contains the Model Finder, Licence Guide, Biobank Guide and regulation notes, with Markdown, JSON and print/PDF export. (The Word export, preparation sheet and non-technical summary builder are in the Streamlit app below.) Regenerate it after changing data with `python scripts/build_html.py`.
+**Easiest:** download `3r-path.html` (the download icon on its GitHub page, not the code view) and open it in any modern browser. It contains the Model Finder, Licence Guide, Biobank Guide and regulation notes, with Markdown, JSON and print/PDF export. (The Word export, preparation sheet and non-technical summary builder are in the Streamlit app below.) Regenerate it after changing data with `python scripts/build_html.py`.
 
 **Full app:**
 

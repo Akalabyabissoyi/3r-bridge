@@ -57,7 +57,7 @@ def data() -> dict:
             "techniques": {k: list(v) for k, v in licence.TECHNIQUES.items()}, "categoryText": licence.CATEGORY_TEXT,
             "modules": licence.MODULES, "named": [list(x) for x in licence.NAMED_PERSONS],
             "worries": [list(x) for x in licence.WORRIES], "checklist": licence.CHECKLIST_PIL,
-            "journey": [list(x) for x in licence.JOURNEY], "regulated": licence.EXAMPLES_REGULATED,
+            "glossary": [[k, v] for k, v in licence.GLOSSARY.items()], "journey": [list(x) for x in licence.JOURNEY], "regulated": licence.EXAMPLES_REGULATED,
             "notRegulated": licence.EXAMPLES_NOT_REGULATED,
         },
         "biobank": {
