@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "3r-bridge"
+name = "3r-path"
 version = "0.2.0"
 description = "Choose, preserve and justify the least sentient model that can answer a research question (Replacement, Reduction, Refinement)."
 readme = "README.md"
@@ -30,7 +30,7 @@ app = ["streamlit>=1.40", "plotly>=5.20"]
 dev = ["pytest>=8", "ruff>=0.6", "streamlit>=1.40", "plotly>=5.20"]
 
 [project.scripts]
-3r-bridge = "bridge.cli:main"
+3r-path = "bridge.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/Akalabyabissoyi/3r-bridge"

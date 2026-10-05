@@ -1,4 +1,4 @@
-"""Build the single-file web app: python scripts/build_html.py  ->  3r-bridge.html (and docs/index.html).
+"""Build the single-file web app: python scripts/build_html.py  ->  3r-path.html (and docs/index.html).
 
 All content comes from the same Python modules the Streamlit app uses; regulatory verdicts are pre-computed for every
 input combination, so the HTML contains no duplicated legal logic.
@@ -75,6 +75,6 @@ def build() -> str:
 
 if __name__ == "__main__":
     html = build()
-    for target in (ROOT / "3r-bridge.html", ROOT / "docs" / "index.html"):
+    for target in (ROOT / "3r-path.html", ROOT / "docs" / "index.html"):
         target.write_text(html, encoding="utf-8")
         print(f"wrote {target.relative_to(ROOT)} ({len(html) // 1024} KB)")

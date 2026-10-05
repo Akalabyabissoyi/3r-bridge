@@ -1,4 +1,4 @@
-"""Model catalogue for the 3R Bridge Model Finder.
+"""Model catalogue for the 3R Path Model Finder.
 
 Each model sits on a "replacement ladder": tier 0 is the least sentient /
 least animal-dependent option, tier 5 is a protected vertebrate. Scores are

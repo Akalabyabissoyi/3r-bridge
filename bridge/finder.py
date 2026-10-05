@@ -87,7 +87,7 @@ def report(question: str, area: str, needs: list[str], results: list[dict], choi
            ss: dict | None, refinements: list[str], robust: dict | None = None,
            override_reasons: dict[str, str] | None = None) -> str:
     """Markdown summary structured along PREPARE / ARRIVE lines, for a project plan or AWERB."""
-    L = ["# 3Rs justification summary", "", f"_Generated with 3R Bridge on {date.today():%d %B %Y}. "
+    L = ["# 3Rs justification summary", "", f"_Generated with 3R Path on {date.today():%d %B %Y}. "
          f"A decision aid to support discussion, not regulatory advice. Catalogue version {DATA_VERSION}._", "",
          "## Research question", "", question or "(not given)", "",
          f"**Research area:** {AREAS[area]}", ""]

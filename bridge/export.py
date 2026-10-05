@@ -15,7 +15,7 @@ def as_dict(question: str, area: str, needs: list[str], results: list[dict], cho
             override_reasons: dict[str, str] | None = None) -> dict:
     """Machine-readable record of a Model Finder session (no personal data)."""
     return {
-        "tool": "3R Bridge", "catalogue_version": DATA_VERSION, "date": date.today().isoformat(),
+        "tool": "3R Path", "catalogue_version": DATA_VERSION, "date": date.today().isoformat(),
         "question": question, "area": {"key": area, "label": AREAS[area]},
         "requirements": [{"key": n, "label": REQUIREMENTS[n]} for n in needs],
         "lowest_adequate_model": ({"key": choice["key"], "name": choice["name"], "tier": TIER_NAMES[choice["tier"]],
@@ -39,7 +39,7 @@ def as_docx(question: str, area: str, needs: list[str], results: list[dict], cho
     """Word version of the justification, ready to paste into an AWERB or grant document."""
     d = Document()
     d.add_heading("3Rs justification summary", 0)
-    d.add_paragraph(f"Generated with 3R Bridge (catalogue {DATA_VERSION}) on {date.today():%d %B %Y}. "
+    d.add_paragraph(f"Generated with 3R Path (catalogue {DATA_VERSION}) on {date.today():%d %B %Y}. "
                     "A decision aid to support discussion, not regulatory advice.")
     d.add_heading("Research question", 1)
     d.add_paragraph(question or "(not given)")

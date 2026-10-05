@@ -1,5 +1,5 @@
 ---
-title: "3R Bridge: an open decision aid for choosing, preserving and justifying the least sentient research model"
+title: "3R Path: an open decision aid for choosing, preserving and justifying the least sentient research model"
 tags:
   - Python
   - 3Rs
@@ -22,7 +22,7 @@ bibliography: paper.bib
 
 # Summary
 
-3R Bridge is an open-source Python and Streamlit tool that helps researchers choose the least sentient model able to answer a
+3R Path is an open-source Python and Streamlit tool that helps researchers choose the least sentient model able to answer a
 research question, size a study, plan welfare refinements and export a structured 3Rs justification. It also includes a
 plain-English guide to UK licensing under the Animals (Scientific Procedures) Act 1986 and a guide to approvals for human
 tissue and biobank samples. Scoring data are versioned, referenced and open to community correction.
@@ -32,7 +32,7 @@ tissue and biobank samples. Scoring data are versioned, referenced and open to c
 The 3Rs principle [@russell1959] asks researchers to replace, reduce and refine animal use, and reporting and planning
 guidelines such as ARRIVE 2.0 [@arrive2020] and PREPARE [@prepare2018] are widely endorsed. Early-career researchers and
 members of review bodies still lack a quick, transparent way to ask, "what is the least sentient model that can genuinely
-answer this question?", and to document the reasoning. Existing resources are mostly static guidance documents. 3R Bridge
+answer this question?", and to document the reasoning. Existing resources are mostly static guidance documents. 3R Path
 turns that reasoning into an explicit, inspectable procedure and also supports preservation (cryopreservation and banking of
 validated non-animal models, e.g. @bissoyi2023) so that models can be shared rather than rebuilt.
 

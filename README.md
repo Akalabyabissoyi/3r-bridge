@@ -1,11 +1,13 @@
-# 3R Bridge
+# 3R Path
+
+*Pathway to the 3Rs.* (Formerly 3R Bridge; the repository and import package keep the old name, `bridge`.)
 
 [![CI](https://github.com/Akalabyabissoyi/3r-bridge/actions/workflows/ci.yml/badge.svg)](https://github.com/Akalabyabissoyi/3r-bridge/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 **Choose, preserve and justify the least sentient model that can answer a research question.**
 
-> **Use it now, no install:** download [`3r-bridge.html`](3r-bridge.html) (one file, works offline, nothing is sent anywhere) and double-click it. &nbsp;
+> **Use it now, no install:** download [`3r-path.html`](3r-path.html) (one file, works offline, nothing is sent anywhere) and double-click it. &nbsp;
 > **Host it:** see [docs/DEPLOY.md](docs/DEPLOY.md) (GitHub Pages serves `docs/index.html`). &nbsp;
 > **Cite:** see [CITATION.cff](CITATION.cff) (Zenodo DOI after the first release).
 
@@ -14,7 +16,7 @@ biobank and cryopreservation scientists who want validated non-animal models to 
 **What does it give you?** A transparent, referenced recommendation with a robustness check, a sample size, a refinement checklist and an
 export (Markdown, Word, JSON) you can attach to a project plan, grant or AWERB submission. Nothing you type is stored.
 
-3R Bridge is a small interactive tool for researchers, Named Persons and ethical review bodies. It has three parts:
+3R Path is a small interactive tool for researchers, Named Persons and ethical review bodies. It has three parts:
 
 - **Model Finder.** Describe a research question and climb a *replacement ladder*, from computer models and human 3D tissue models, through non-protected organisms such as the fruit fly, to protected vertebrates. Then size the study (Reduction), plan welfare measures (Refinement) and export a short 3Rs justification.
 - **Licence Guide.** A plain-English, step-by-step guide for researchers new to in vivo work in the UK, who may feel daunted by the regulations: do I need a licence, which personal licence category and training, who to talk to, and help preparing either a personal licence application or a project licence non-technical summary. A journey map shows where you are, a jargon buster explains every acronym, and Dot, a fruit fly in lab goggles, keeps you company.
@@ -24,7 +26,7 @@ export (Markdown, Word, JSON) you can attach to a project plan, grant or AWERB s
 
 ## Why I built it
 
-My work sits on the bridge between in vivo and in vitro research. I have carried out rodent studies, and I now develop ways to cryopreserve human 3D models (liver spheroids, intestinal barrier models, assay-ready cell monolayers) and Drosophila embryos, so that validated non-animal models can be banked and shared instead of rebuilt for every study. The question I keep coming back to is simple: *what is the least sentient model that can genuinely answer this question?* 3R Bridge is my attempt to make that question quick and transparent to ask.
+My work sits on the bridge between in vivo and in vitro research. I have carried out rodent studies, and I now develop ways to cryopreserve human 3D models (liver spheroids, intestinal barrier models, assay-ready cell monolayers) and Drosophila embryos, so that validated non-animal models can be banked and shared instead of rebuilt for every study. The question I keep coming back to is simple: *what is the least sentient model that can genuinely answer this question?* 3R Path is my attempt to make that question quick and transparent to ask.
 
 The Biobank Guide came out of the SLTB 2026 pre-conference mini-symposium at BIOCEV, *Cryopreservation, Biobanking and Functional Readiness of Cell-based and Bioengineered Systems*, where I spoke on controlling ice formation in 3D cell models. Talks from biobanks in the Czech Republic and Germany, and the debate on whether cryopreserved products should be ready to use straight after thawing, made a point that is easy to miss: a sample is only useful if it is ethically sourced, properly approved, and stored and thawed in a way that preserves its function. So the guide covers both the approvals and the questions about freezing, storage and post-thaw quality.
 
@@ -67,7 +69,7 @@ The Biobank Guide came out of the SLTB 2026 pre-conference mini-symposium at BIO
 
 ## Run it
 
-**Easiest:** open `3r-bridge.html` in any modern browser. It contains the Model Finder, Licence Guide, Biobank Guide and regulation notes, with Markdown, JSON and print/PDF export. (The Word export, preparation sheet and non-technical summary builder are in the Streamlit app below.) Regenerate it after changing data with `python scripts/build_html.py`.
+**Easiest:** open `3r-path.html` in any modern browser. It contains the Model Finder, Licence Guide, Biobank Guide and regulation notes, with Markdown, JSON and print/PDF export. (The Word export, preparation sheet and non-technical summary builder are in the Streamlit app below.) Regenerate it after changing data with `python scripts/build_html.py`.
 
 **Full app:**
 
@@ -79,7 +81,7 @@ pip install -e ".[app]"
 streamlit run app.py
 ```
 
-Or with Docker: `docker build -t 3r-bridge . && docker run -p 8501:8501 3r-bridge`.
+Or with Docker: `docker build -t 3r-path . && docker run -p 8501:8501 3r-path`.
 
 ### Command line and Python
 
@@ -125,7 +127,7 @@ more jurisdictions, worked applications for common study types, a Zenodo DOI and
 
 ## Important
 
-The scores are expert judgements intended to start a conversation, not a regulatory decision, and the Licence Guide is a learning aid, not legal advice. 3R Bridge does not replace advice from Named Persons, the Named Veterinary Surgeon, the AWERB or the Home Office.
+The scores are expert judgements intended to start a conversation, not a regulatory decision, and the Licence Guide is a learning aid, not legal advice. 3R Path does not replace advice from Named Persons, the Named Veterinary Surgeon, the AWERB or the Home Office.
 
 ## References
 

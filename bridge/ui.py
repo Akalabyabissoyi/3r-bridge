@@ -1,4 +1,4 @@
-"""Visual layer for 3R Bridge: page styling and illustrated HTML components."""
+"""Visual layer for 3R Path: page styling and illustrated HTML components."""
 from __future__ import annotations
 
 import html
@@ -170,11 +170,11 @@ def hero():
         for i, f in enumerate([art.mouse, art.tissue, art.fly, art.spheroid, art.cells2d, art.insilico])
     )
     st.html(f"""
-    <div class="rb-brand">{art.fly(30)}<span>3R Bridge</span></div>
+    <div class="rb-brand">{art.fly(30)}<span>3R Path</span></div>
     <div class="rb-hero">
       <div>
         <h1 class="rb-display">Start with the least sentient model that can answer your question.</h1>
-        <p>3R Bridge helps you weigh computer models, human 3D tissue models and non-protected organisms
+        <p>3R Path helps you weigh computer models, human 3D tissue models and non-protected organisms
         before animals, plan Reduction and Refinement, and, if animals are needed, find your way through a UK licence
         application with confidence.</p>
       </div>

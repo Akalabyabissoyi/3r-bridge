@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>3R Bridge: choose the least sentient adequate model</title>
+<title>3R Path: pathway to the 3Rs</title>
 <meta name="description" content="Choose, preserve and justify the least sentient research model that can answer a question. Runs entirely in your browser; nothing you type is stored or sent.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231F6F63'/%3E%3Cpath d='M20 12v40M44 12v40M20 22h24M20 32h24M20 42h24' stroke='%23fff' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
@@ -70,7 +70,7 @@ footer{color:var(--ink3);font-size:.88rem;margin:24px 0 8px}
 <a class="skip" href="#main">Skip to content</a>
 <div class="wrap">
 <header class="top">
-  <div class="brand"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#1F6F63"/><path d="M20 12v40M44 12v40M20 22h24M20 32h24M20 42h24" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg>3R Bridge</div>
+  <div class="brand"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#1F6F63"/><path d="M20 12v40M44 12v40M20 22h24M20 32h24M20 42h24" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg>3R Path <span style="font-weight:400;font-size:.95rem;color:var(--ink3)">Pathway to the 3Rs</span></div>
   <span class="grow"></span>
   <button class="btn alt noprint" id="themeBtn" type="button" aria-label="Switch between light and dark theme">Dark / light</button>
 </header>
@@ -88,7 +88,7 @@ footer{color:var(--ink3);font-size:.88rem;margin:24px 0 8px}
 <section role="tabpanel" id="p-world"></section>
 <section role="tabpanel" id="p-about"></section>
 </main>
-<footer>3R Bridge <span id="ver"></span>. A decision aid and learning aid for discussion with Named Persons, the Named Veterinary Surgeon, the AWERB, a statistician and the regulator. It is not regulatory or legal advice. MIT licence. <a href="https://github.com/Akalabyabissoyi/3r-bridge">Source, citation and issue tracker</a>.</footer>
+<footer>3R Path <span id="ver"></span>. A decision aid and learning aid for discussion with Named Persons, the Named Veterinary Surgeon, the AWERB, a statistician and the regulator. It is not regulatory or legal advice. MIT licence. <a href="https://github.com/Akalabyabissoyi/3r-bridge">Source, citation and issue tracker</a>.</footer>
 </div>
 
 <script>
@@ -321,7 +321,7 @@ function renderFinderKeep(id){ // re-render everything except the field being ty
 function today(){ return new Date().toISOString().slice(0,10); }
 function ctx(){ const needs=[...st.needs], res=assess(st.area,needs,st.overrides); return {needs,res,pick:lowest(res),rob:robustness(st.area,needs,st.overrides),r:reduction()}; }
 function markdown(){
-  const {needs,res,pick,rob,r}=ctx(); const L=["# 3Rs justification summary","",`_Generated with 3R Bridge on ${today()}. A decision aid to support discussion, not regulatory advice. Catalogue version ${D.version}._`,"","## Research question","",st.question||"(not given)","",`**Research area:** ${D.areas[st.area]}`,""];
+  const {needs,res,pick,rob,r}=ctx(); const L=["# 3Rs justification summary","",`_Generated with 3R Path on ${today()}. A decision aid to support discussion, not regulatory advice. Catalogue version ${D.version}._`,"","## Research question","",st.question||"(not given)","",`**Research area:** ${D.areas[st.area]}`,""];
   if(needs.length) L.push("**Requirements:**","",...needs.map(n=>"- "+D.requirements[n]),"");
   L.push("## Replacement","");
   if(pick){ L.push(`**Lowest adequate model on the ladder:** ${pick.name} (${D.tiers[pick.tier]}).`,`Regulatory status: ${pick.status}`,""); if(pick.evidence?.length) L.push("Supporting literature for this model:","",...pick.evidence.map(e=>"- "+e),""); }
@@ -336,7 +336,7 @@ function markdown(){
   L.push("","## References","",...D.references.map(x=>"- "+x));
   return L.join("\n");
 }
-function jsonDoc(){ const {needs,res,pick,rob,r}=ctx(); return {tool:"3R Bridge",catalogue_version:D.version,date:today(),question:st.question,area:{key:st.area,label:D.areas[st.area]},
+function jsonDoc(){ const {needs,res,pick,rob,r}=ctx(); return {tool:"3R Path",catalogue_version:D.version,date:today(),question:st.question,area:{key:st.area,label:D.areas[st.area]},
   requirements:needs.map(n=>({key:n,label:D.requirements[n]})),lowest_adequate_model:pick?{key:pick.key,name:pick.name,tier:D.tiers[pick.tier],status:pick.status}:null,
   robustness:rob,score_overrides:Object.fromEntries(Object.keys(st.overrides).map(k=>[D.models.find(m=>m.key===k).name,st.reasons[k]||""])),
   ladder:res.map(x=>({key:x.key,name:x.name,tier:D.tiers[x.tier],verdict:x.verdict,score:x.score,unmet:x.gaps,evidence:x.evidence||[]})),
@@ -411,11 +411,11 @@ function renderWorld(){
    Object.values(D.regions).map(r=>`<details><summary>${esc(r.name)}</summary><p><b>Law.</b> ${esc(r.law)}</p><p><b>What is protected.</b> ${esc(r.protected)}</p><p><b>Authorisation.</b> ${esc(r.authorisation)}</p><p><b>Alternatives.</b> ${esc(r.alternatives)}</p><p><b>Read next.</b> ${esc(r.read_next.join("; "))}</p></details>`).join("");
 }
 function renderAbout(){
-  $("#p-about").innerHTML=`<div class="card"><h2>About 3R Bridge</h2><p>3R Bridge helps you ask a simple question quickly and transparently: <i>what is the least sentient model that can genuinely answer this question?</i> It covers Replacement (the ladder), Reduction (sample size), Refinement (welfare checklist), a UK licence guide and a UK human tissue and biobank guide.</p>
-  <h3>Important</h3><p>The scores are expert judgements (currently author judgement, not yet formally reviewed) intended to start a conversation, not a regulatory decision. The Licence and Biobank guides are learning aids, not legal advice. 3R Bridge does not replace advice from Named Persons, the Named Veterinary Surgeon, the AWERB, a statistician, the HTA or the Home Office.</p>
+  $("#p-about").innerHTML=`<div class="card"><h2>About 3R Path</h2><p>3R Path helps you ask a simple question quickly and transparently: <i>what is the least sentient model that can genuinely answer this question?</i> It covers Replacement (the ladder), Reduction (sample size), Refinement (welfare checklist), a UK licence guide and a UK human tissue and biobank guide.</p>
+  <h3>Important</h3><p>The scores are expert judgements (currently author judgement, not yet formally reviewed) intended to start a conversation, not a regulatory decision. The Licence and Biobank guides are learning aids, not legal advice. 3R Path does not replace advice from Named Persons, the Named Veterinary Surgeon, the AWERB, a statistician, the HTA or the Home Office.</p>
   <h3>Privacy</h3><p>This page runs entirely in your browser. It has no server, no analytics and no cookies; nothing you enter is stored or sent anywhere, and it works offline once saved. Exports are created on your device. Do not rely on a shared public copy for confidential details; save the file and use it locally instead.</p>
   <h3>Method</h3><p>Each model has a 0 to 3 suitability score per research area; each unmet requirement removes a point, and missing a hard requirement (human biology, intact organism, behaviour, vertebrate physiology) caps the verdict at "partial". The recommendation is the lowest adequate rung of the ladder. Robustness re-runs the ladder with every score nudged by one point. Sample sizes use exact noncentral t and F calculations, Schoenfeld's formula for log-rank events and an arcsine approximation for proportions; confirm designs with the NC3Rs Experimental Design Assistant.</p>
-  <h3>Cite and contribute</h3><p>Akalabya Bissoyi, 3R Bridge (${esc(D.version)}), <a href="https://github.com/Akalabyabissoyi/3r-bridge">github.com/Akalabyabissoyi/3r-bridge</a>. Report a wrong score or reference through the repository's "evidence" issue template.</p>
+  <h3>Cite and contribute</h3><p>Akalabya Bissoyi, 3R Path (${esc(D.version)}), <a href="https://github.com/Akalabyabissoyi/3r-bridge">github.com/Akalabyabissoyi/3r-bridge</a>. Report a wrong score or reference through the repository's "evidence" issue template.</p>
   <h3>References</h3><ul>${D.references.map(r=>`<li>${esc(r)}</li>`).join("")}</ul></div>`;
 }
 

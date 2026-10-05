@@ -6,7 +6,7 @@ const fs = require('fs');
   const ex = JSON.parse(fs.readFileSync(process.argv[2]));
   const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome' }).catch(()=>chromium.launch());
   const pg = await b.newPage(); const errs=[]; pg.on('pageerror',e=>errs.push(e.message)); pg.on('console',m=>{if(m.type()==='error')errs.push(m.text())});
-  await pg.goto('file://' + require('path').resolve(__dirname, '../3r-bridge.html'));
+  await pg.goto('file://' + require('path').resolve(__dirname, '../3r-path.html'));
   const out = await pg.evaluate(ex => {
     const {assess,lowest,robustness,S}=window.__3R; const bad=[];
     for (const [k,a,exp] of ex.stats){ const got = S[{two:'twoGroup',paired:'paired',anova:'anova',props:'props',events:'events'}[k]](...a); if(got!==exp) bad.push(['stat',k,a,got,exp]); }

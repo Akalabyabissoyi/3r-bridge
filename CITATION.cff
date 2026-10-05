@@ -1,6 +1,6 @@
 cff-version: 1.2.0
-message: "If you use 3R Bridge, please cite it as below."
-title: "3R Bridge"
+message: "If you use 3R Path, please cite it as below."
+title: "3R Path: pathway to the 3Rs"
 abstract: "A decision aid for choosing, preserving and justifying the least sentient research model that can answer a question (Replacement, Reduction, Refinement), with UK licence and biobank guides."
 type: software
 version: 0.2.0

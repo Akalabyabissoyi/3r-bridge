@@ -12,7 +12,7 @@ from .finder import assess, lowest_adequate, report, robustness
 
 
 def main(argv: list[str] | None = None) -> int:
-    ap = argparse.ArgumentParser(prog="3r-bridge", description="Choose the least sentient adequate research model.")
+    ap = argparse.ArgumentParser(prog="3r-path", description="Choose the least sentient adequate research model.")
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     f = sub.add_parser("find", help="Climb the replacement ladder for a research question")

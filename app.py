@@ -1,4 +1,4 @@
-"""3R Bridge: choose, preserve and justify the least sentient model that can answer a question."""
+"""3R Path: choose, preserve and justify the least sentient model that can answer a question."""
 
 import numpy as np
 import plotly.graph_objects as go
@@ -18,7 +18,7 @@ from bridge.finder import ADEQUATE, PARTIAL, assess, lowest_adequate, report, ro
 from bridge.regions import LAST_REVIEWED as REGIONS_REVIEWED
 from bridge.regions import REGIONS
 
-st.set_page_config(page_title="3R Bridge", page_icon="🪜", layout="wide", initial_sidebar_state="collapsed")
+st.set_page_config(page_title="3R Path", page_icon="🪜", layout="wide", initial_sidebar_state="collapsed")
 
 SHORT = {0: "In silico", 1: "2D cells", 2: "3D human", 3: "Non-protected", 4: "Ex vivo", 5: "ASPA-protected"}
 COLOURS = {ADEQUATE: "#1F6F63", PARTIAL: "#E2A33A", "unsuitable": "#C9D1CE"}
@@ -236,7 +236,7 @@ with tab_finder:
     with st.expander("Preview"):
         st.markdown(md)
 
-    st.html('<p class="rb-foot">3R Bridge is a decision aid for discussion with Named Persons and ethical review bodies. '
+    st.html('<p class="rb-foot">3R Path is a decision aid for discussion with Named Persons and ethical review bodies. '
             'It does not replace licensing, veterinary or AWERB advice.</p>')
 
 # ------------------------------------------------------------------ Licence Guide

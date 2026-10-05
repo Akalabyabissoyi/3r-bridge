@@ -11,7 +11,7 @@ import build_html  # noqa: E402
 
 def test_generated_files_are_up_to_date():
     html = build_html.build()
-    assert (ROOT / "3r-bridge.html").read_text(encoding="utf-8") == html, "run: python scripts/build_html.py"
+    assert (ROOT / "3r-path.html").read_text(encoding="utf-8") == html, "run: python scripts/build_html.py"
     assert (ROOT / "docs" / "index.html").read_text(encoding="utf-8") == html
 
 

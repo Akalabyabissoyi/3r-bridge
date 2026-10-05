@@ -1,7 +1,7 @@
 # Deploying
 
 ## The single-file web app (simplest)
-`3r-bridge.html` is a complete app in one file. Send it to colleagues, put it on a shared drive or intranet, or serve it from any web server; it needs no
+`3r-path.html` is a complete app in one file. Send it to colleagues, put it on a shared drive or intranet, or serve it from any web server; it needs no
 backend and makes no network requests.
 
 **GitHub Pages:** Settings > Pages > Deploy from a branch > `main` / `/docs` (serves `docs/index.html`, an identical copy). Pages on a private
@@ -18,8 +18,8 @@ Private repositories need access granted to Streamlit in your GitHub settings.
 
 ## Docker (institutional or offline use)
 ```bash
-docker build -t 3r-bridge .
-docker run -p 8501:8501 3r-bridge
+docker build -t 3r-path .
+docker run -p 8501:8501 3r-path
 ```
 
 ## Hugging Face Spaces

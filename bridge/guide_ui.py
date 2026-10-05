@@ -91,7 +91,7 @@ def _docx(fields: dict, title: str, protocol: dict) -> bytes:
     for h in ("Heading 1", "Heading 2"):
         doc.styles[h].font.color.rgb = RGBColor(0, 0, 0)
     doc.add_heading(title or "Project licence: draft non-technical summary", level=1)
-    doc.add_paragraph().add_run(f"Draft prepared with 3R Bridge on {date.today():%d %B %Y}. "
+    doc.add_paragraph().add_run(f"Draft prepared with 3R Path on {date.today():%d %B %Y}. "
                                 "For discussion with the NTCO, NVS and AWERB before submission on ASPeL.").italic = True
     for section, items in NTS:
         doc.add_heading(section, level=2)
@@ -143,7 +143,7 @@ def _pil_docx(info: dict, techniques: list[str], cats: list[str], modules: list[
     for h in ("Heading 1", "Heading 2"):
         doc.styles[h].font.color.rgb = RGBColor(0, 0, 0)
     doc.add_heading("Personal licence preparation sheet", level=1)
-    doc.add_paragraph().add_run(f"Prepared with 3R Bridge on {date.today():%d %B %Y}. Bring this to your first meeting "
+    doc.add_paragraph().add_run(f"Prepared with 3R Path on {date.today():%d %B %Y}. Bring this to your first meeting "
                                 "with the NTCO; the application itself is made on ASPeL.").italic = True
     doc.add_heading("About me", level=2)
     for label, val in info.items():
