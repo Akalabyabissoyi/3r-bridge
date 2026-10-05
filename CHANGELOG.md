@@ -4,6 +4,9 @@ All notable changes are listed here. The catalogue (`bridge/data/models.json`) i
 
 ## 0.2.0 - 2026-10-05
 
+### Design
+- Professional redesign of the web app with a purple and gold palette inspired by the University of Manchester colours (no logo or crest; the footer states it is an independent tool), masthead, ladder illustration, sticky tabs, badges and a polished dark mode. Contrast checked to WCAG AA.
+
 ### Renamed
 - 3R Bridge is now **3R Path** ("Pathway to the 3Rs"). Command: `3r-path`; web file: `3r-path.html`. The Python package is still `bridge` and the repository URL is unchanged.
 
