@@ -3,6 +3,7 @@
 All notable changes are listed here. The catalogue (`bridge/data/models.json`) is versioned with the package.
 
 ## Unreleased
+- Added a searchable jargon buster (25 licensing terms, including NTCO and NIO) to the Licence Guide in the single-file web app, using the same definitions as the Streamlit app.
 - Removed the personal email address from SECURITY.md, CODE_OF_CONDUCT.md and pyproject.toml; contact is through the GitHub profile.
 
 ## 0.2.0 - 2026-10-05

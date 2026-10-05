@@ -40,3 +40,10 @@ def test_every_tab_has_an_information_panel():
     for tab in ("finder", "licence", "bank", "world", "about"):
         assert f'id="info-{tab}"' in html and f"{tab}:{{tip:" in html
     assert "About this tab" in html and "aria-expanded" in html
+
+
+def test_licence_tab_has_a_searchable_jargon_buster():
+    html = build_html.build()
+    assert "Jargon buster" in html and 'id="jb-q"' in html
+    terms = [t for t, _ in build_html.data()["licence"]["glossary"]]
+    assert {"NTCO", "NIO", "AWERB", "PIL", "PPL"} <= set(terms)

@@ -121,6 +121,13 @@ table{border-collapse:collapse;width:100%;font-size:.93rem;background:var(--card
 .mini{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.mini>*{flex:none}
 .notice{background:var(--brand-soft);border-left:5px solid var(--brand);border-radius:10px;padding:10px 14px;margin:0 0 16px;font-size:.93rem;color:var(--ink)}
 
+/* jargon buster */
+.jb{margin:0 0 16px}.jb summary{font-weight:700;color:var(--brand)}
+.jb input[type=search]{width:100%;font:inherit;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:9px 11px;margin:6px 0 10px}
+.jb dl{margin:0;display:grid;grid-template-columns:minmax(120px,max-content) minmax(0,1fr);gap:0}
+.jb dt,.jb dd{padding:8px 10px;border-bottom:1px solid var(--line);margin:0}.jb dt{font-weight:700;color:var(--brand)}
+.jb dd{color:var(--ink2)}.jb mark{background:var(--gold);color:#3B0A5C;border-radius:3px;padding:0 2px}
+@media (max-width:560px){.jb dl{grid-template-columns:1fr}.jb dt{border-bottom:0;padding-bottom:0}}
 /* tab information */
 .tabinfo{display:none;margin:0 0 16px}.tabinfo.on{display:block}
 .infobtn{font:inherit;font-weight:600;font-size:.92rem;display:inline-flex;align-items:center;gap:8px;background:var(--brand-soft);color:var(--brand);border:1.5px solid var(--brand);border-radius:999px;padding:5px 14px 5px 8px;cursor:pointer}
@@ -182,7 +189,7 @@ footer a{color:var(--gold)}footer b{color:#fff}
 <main id="main">
 <div class="tabinfo" id="info-finder"></div><div class="tabinfo" id="info-licence"></div><div class="tabinfo" id="info-bank"></div><div class="tabinfo" id="info-world"></div><div class="tabinfo" id="info-about"></div>
 <section role="tabpanel" id="p-finder"></section>
-<section role="tabpanel" id="p-licence"></section>
+<section role="tabpanel" id="p-licence"><div id="jargon"></div><div id="licence-body"></div></section>
 <section role="tabpanel" id="p-bank"></section>
 <section role="tabpanel" id="p-world"></section>
 <section role="tabpanel" id="p-about"></section>
@@ -220,7 +227,7 @@ const TAB_INFO = {
  licence:{tip:"A step-by-step guide to UK animal research licences",
   title:"About the Licence Guide",
   what:"<p>A plain-English guide for researchers who are <b>new to in vivo work in the UK</b> and may feel daunted by the rules under the Animals (Scientific Procedures) Act 1986 (ASPA).</p><p>It tells you whether your work needs a licence, which personal licence category and training modules apply, and who to talk to.</p>",
-  how:"<ol><li><b>Do I need a licence?</b> Answer a few plain questions about species, life stage and what you will do.</li><li><b>Which personal licence?</b> Tick the techniques you will perform to see your category (A to D) and modules.</li><li><b>Who do I talk to?</b> See what each Named Person and the AWERB can help with.</li><li><b>Ready to submit?</b> Work through the checklist.</li></ol>",
+  how:"<ol><li><b>Do I need a licence?</b> Answer a few plain questions about species, life stage and what you will do.</li><li><b>Which personal licence?</b> Tick the techniques you will perform to see your category (A to D) and modules.</li><li><b>Who do I talk to?</b> See what each Named Person and the AWERB can help with.</li><li><b>Ready to submit?</b> Work through the checklist.</li></ol><p>Stuck on a letter code? Open the <b>Jargon buster</b> above the steps and search for it (NTCO, NIO, AWERB, PIL and more).</p>",
   know:"<ul><li>UK only. Other countries are in the Other regulations tab.</li><li>A learning aid based on Home Office guidance, not legal advice. Your Named Persons and the Home Office have the final word.</li><li>The full Streamlit app also builds a Word preparation sheet and non-technical summary drafts.</li></ul>"},
  bank:{tip:"Approvals and questions for using human tissue, cells and biobank samples",
   title:"About the Biobank Guide",
@@ -484,8 +491,20 @@ function jsonDoc(){ const {needs,res,pick,rob,r}=ctx(); return {tool:"3R Path",c
 /* ---------------- Licence Guide ---------------- */
 const L = {step:0, subject:"mammal_bird_reptile", stage:true, above:true, ga:false, s1:false, tech:new Set(["injection"]), done:new Set(), pilDone:new Set()};
 const LSTEPS=["1. Do I need a licence?","2. Which personal licence?","3. Who do I talk to?","4. Ready to submit?"];
+function buildJargon(){
+  const box=$("#jargon"), g=D.licence.glossary;
+  box.innerHTML=`<details class="jb card"><summary>Jargon buster: what do all the letters mean?</summary>
+    <label for="jb-q" class="small">Search a term or a word in its meaning (try NTCO, NIO or licence)</label>
+    <input id="jb-q" type="search" placeholder="Search ${g.length} terms" autocomplete="off">
+    <p class="small" id="jb-n" aria-live="polite"></p><dl id="jb-l"></dl></details>`;
+  const hi=(s,q)=>{ const e=esc(s); if(!q) return e; const i=s.toLowerCase().indexOf(q); return i<0?e:esc(s.slice(0,i))+"<mark>"+esc(s.slice(i,i+q.length))+"</mark>"+esc(s.slice(i+q.length)); };
+  const draw=()=>{ const q=$("#jb-q").value.trim().toLowerCase(); const rows=g.filter(([t,d])=>!q||t.toLowerCase().includes(q)||d.toLowerCase().includes(q));
+    $("#jb-l").innerHTML=rows.map(([t,d])=>`<dt>${hi(t,q)}</dt><dd>${hi(d,q)}</dd>`).join("")||"";
+    $("#jb-n").textContent=rows.length?`${rows.length} of ${g.length} terms`:"No term matches. Try a shorter word."; };
+  $("#jb-q").oninput=draw; draw();
+}
 function renderLicence(){
-  const p=$("#p-licence"); const lc=D.licence;
+  const p=$("#licence-body"); const lc=D.licence;
   let h=`<p class="lead">A plain-English guide for researchers new to in vivo work in the UK. Work through the steps in order, or jump to the one you need.</p>
    <ol class="steps">${LSTEPS.map((s,i)=>`<li><button type="button" class="chip" data-ls="${i}" aria-pressed="${i===L.step}">${s}</button></li>`).join("")}</ol>
    <ol class="steps" aria-label="Licence journey">${lc.journey.map((j,i)=>`<li class="tag${i<=[0,1,2,3][L.step]?" adequate":""}" title="${esc(j[1])}">${esc(j[0])}</li>`).join("")}</ol>`;
@@ -558,7 +577,7 @@ function renderAbout(){
   <h3>References</h3><ul>${D.references.map(r=>`<li>${esc(r)}</li>`).join("")}</ul></div>`;
 }
 
-TABS.forEach(([id])=>buildInfo(id)); finderShell(); renderFinder(); renderLicence(); renderBank(); renderWorld(); renderAbout();
+TABS.forEach(([id])=>buildInfo(id)); buildJargon(); finderShell(); renderFinder(); renderLicence(); renderBank(); renderWorld(); renderAbout();
 show(TABS.some(t=>"#"+t[0]===location.hash)?location.hash.slice(1):"finder");
 </script>
 </body>
