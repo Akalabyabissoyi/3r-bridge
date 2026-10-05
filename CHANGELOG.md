@@ -2,6 +2,9 @@
 
 All notable changes are listed here. The catalogue (`bridge/data/models.json`) is versioned with the package.
 
+## Unreleased
+- Removed the personal email address from SECURITY.md, CODE_OF_CONDUCT.md and pyproject.toml; contact is through the GitHub profile.
+
 ## 0.2.0 - 2026-10-05
 
 ### Design

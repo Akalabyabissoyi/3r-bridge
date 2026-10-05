@@ -9,7 +9,7 @@ description = "Choose, preserve and justify the least sentient model that can an
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
-authors = [{ name = "Akalabya Bissoyi", email = "bissoyi.akalabya@gmail.com" }]
+authors = [{ name = "Akalabya Bissoyi" }]
 keywords = ["3Rs", "animal replacement", "NAMs", "research ethics", "ASPA", "biobanking", "streamlit"]
 classifiers = [
   "Development Status :: 4 - Beta",
