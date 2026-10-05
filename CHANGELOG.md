@@ -3,6 +3,7 @@
 All notable changes are listed here. The catalogue (`bridge/data/models.json`) is versioned with the package.
 
 ## Unreleased
+- CI tests the oldest and newest supported Python (3.10 and 3.13) instead of four versions, and cancels superseded runs, to reduce queueing and failure emails.
 - README: explain that GitHub shows the HTML file as code and how to download and open it.
 - Added a searchable jargon buster (25 licensing terms, including NTCO and NIO) to the Licence Guide in the single-file web app, using the same definitions as the Streamlit app.
 - Removed the personal email address from SECURITY.md, CODE_OF_CONDUCT.md and pyproject.toml; contact is through the GitHub profile.
