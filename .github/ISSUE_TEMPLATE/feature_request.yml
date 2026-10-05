@@ -1,0 +1,11 @@
+name: Feature request
+description: A model, jurisdiction, calculator or guide you would like to see
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: need
+    attributes: { label: What do you need, and for what kind of study? }
+    validations: { required: true }
+  - type: textarea
+    id: extra
+    attributes: { label: Anything else (links, guidelines, examples) }

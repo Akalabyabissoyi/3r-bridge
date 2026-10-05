@@ -43,6 +43,7 @@ def test_new_researcher_content():
 
 def test_pil_sheet_builds():
     from datetime import date
+
     from bridge.guide_ui import _pil_docx
     data = _pil_docx({"Name": "Test", "Species": ["Mouse"]}, ["Injections"], ["A"],
                      [{"Module": "L", "Status": "Completed", "Provider": "X", "Date": date(2026, 1, 5)}], "Q?")

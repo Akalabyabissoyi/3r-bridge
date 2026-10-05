@@ -1,4 +1,4 @@
-"""Original cartoon illustrations for 3R Bridge, drawn as inline SVG.
+"""Original cartoon illustrations for 3R Path, drawn as inline SVG.
 
 One consistent style: rounded shapes, a 2.2 px spruce ink outline and flat fills
 from the app palette. Everything is hand-built here, so there are no image files

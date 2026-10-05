@@ -11,9 +11,29 @@ from docx.shared import Pt, RGBColor
 from . import ui
 from .catalogue import TIER_NAMES
 from .examples import CREDIT, EXAMPLES, SOURCE_PAGE, SOURCE_URL
-from .licence import (CATEGORY_TEXT, CHECKLIST, CHECKLIST_PIL, ENDPOINTS, EXAMPLES_NOT_REGULATED, EXAMPLES_REGULATED,
-                      GLOSSARY, JOURNEY, MODULES, NAMED_PERSONS, NTS, SEVERITY, SPECIES, STEP_STAGE, SUBJECTS,
-                      TECHNIQUES, WORRIES, licence_verdict, modules_for, pil_categories, readability)
+from .licence import (
+    CATEGORY_TEXT,
+    CHECKLIST,
+    CHECKLIST_PIL,
+    ENDPOINTS,
+    EXAMPLES_NOT_REGULATED,
+    EXAMPLES_REGULATED,
+    GLOSSARY,
+    JOURNEY,
+    MODULES,
+    NAMED_PERSONS,
+    NTS,
+    SEVERITY,
+    SPECIES,
+    STEP_STAGE,
+    SUBJECTS,
+    TECHNIQUES,
+    WORRIES,
+    licence_verdict,
+    modules_for,
+    pil_categories,
+    readability,
+)
 
 STEPS = ["1. Do I need a licence?", "2. Which licence and training?", "3. Who can help me?",
          "4. Prepare my application", "5. Ready to submit?"]
@@ -54,7 +74,9 @@ def _prefill(results, choice, ss, refinements):
         "guidance": "PREPARE guidelines for planning, ARRIVE 2.0 for reporting, NC3Rs resources, and LASA guidance on good practice.",
         "informed": "Through the establishment's Named Information Officer, NC3Rs newsletters and events, and local 3Rs seminars.",
     }
-    if ss:
+    if ss and ss.get("text"):
+        text["numbers"] = "We used a power calculation. " + ss["text"]
+    elif ss:
         text["numbers"] = (f"We used a power calculation: to detect a difference of {ss['diff']} with a standard deviation "
                            f"of {ss['sd']}, at a significance level of {ss['alpha']} and {ss['power']:.0%} power, "
                            f"we need {ss['n']} animals per group.")
@@ -69,7 +91,7 @@ def _docx(fields: dict, title: str, protocol: dict) -> bytes:
     for h in ("Heading 1", "Heading 2"):
         doc.styles[h].font.color.rgb = RGBColor(0, 0, 0)
     doc.add_heading(title or "Project licence: draft non-technical summary", level=1)
-    doc.add_paragraph().add_run(f"Draft prepared with 3R Bridge on {date.today():%d %B %Y}. "
+    doc.add_paragraph().add_run(f"Draft prepared with 3R Path on {date.today():%d %B %Y}. "
                                 "For discussion with the NTCO, NVS and AWERB before submission on ASPeL.").italic = True
     for section, items in NTS:
         doc.add_heading(section, level=2)
@@ -121,7 +143,7 @@ def _pil_docx(info: dict, techniques: list[str], cats: list[str], modules: list[
     for h in ("Heading 1", "Heading 2"):
         doc.styles[h].font.color.rgb = RGBColor(0, 0, 0)
     doc.add_heading("Personal licence preparation sheet", level=1)
-    doc.add_paragraph().add_run(f"Prepared with 3R Bridge on {date.today():%d %B %Y}. Bring this to your first meeting "
+    doc.add_paragraph().add_run(f"Prepared with 3R Path on {date.today():%d %B %Y}. Bring this to your first meeting "
                                 "with the NTCO; the application itself is made on ASPeL.").italic = True
     doc.add_heading("About me", level=2)
     for label, val in info.items():
