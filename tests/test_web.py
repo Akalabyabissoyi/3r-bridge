@@ -33,3 +33,10 @@ def test_html_has_accessibility_basics():
     html = build_html.build()
     for needle in ('lang="en"', 'name="viewport"', 'role="tablist"', "prefers-color-scheme", "prefers-reduced-motion" if False else ":focus-visible"):
         assert needle in html
+
+
+def test_every_tab_has_an_information_panel():
+    html = build_html.build()
+    for tab in ("finder", "licence", "bank", "world", "about"):
+        assert f'id="info-{tab}"' in html and f"{tab}:{{tip:" in html
+    assert "About this tab" in html and "aria-expanded" in html

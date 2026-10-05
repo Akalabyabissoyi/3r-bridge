@@ -5,6 +5,7 @@ All notable changes are listed here. The catalogue (`bridge/data/models.json`) i
 ## 0.2.0 - 2026-10-05
 
 ### Design
+- Every tab of the web app has an "About this tab" panel (what it does, how to use it, good to know) and a hover tooltip.
 - Professional redesign of the web app with a purple and gold palette inspired by the University of Manchester colours (no logo or crest; the footer states it is an independent tool), masthead, ladder illustration, sticky tabs, badges and a polished dark mode. Contrast checked to WCAG AA.
 
 ### Renamed

@@ -121,12 +121,27 @@ table{border-collapse:collapse;width:100%;font-size:.93rem;background:var(--card
 .mini{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.mini>*{flex:none}
 .notice{background:var(--brand-soft);border-left:5px solid var(--brand);border-radius:10px;padding:10px 14px;margin:0 0 16px;font-size:.93rem;color:var(--ink)}
 
+/* tab information */
+.tabinfo{display:none;margin:0 0 16px}.tabinfo.on{display:block}
+.infobtn{font:inherit;font-weight:600;font-size:.92rem;display:inline-flex;align-items:center;gap:8px;background:var(--brand-soft);color:var(--brand);border:1.5px solid var(--brand);border-radius:999px;padding:5px 14px 5px 8px;cursor:pointer}
+.infobtn:hover{background:var(--card)}
+.infobtn .i{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--brand);color:var(--on-brand);font-weight:800;font-size:.85rem;font-style:italic;font-family:Georgia,serif}
+.infobtn .chev{transition:transform .2s}.infobtn[aria-expanded=true] .chev{transform:rotate(180deg)}
+.infopanel{margin-top:10px;background:var(--card);border:1px solid var(--line);border-left:6px solid var(--brand);border-radius:var(--r);padding:16px 20px;box-shadow:var(--shadow)}
+.infopanel[hidden]{display:none}
+.infopanel h3{font-size:1.1rem;margin-bottom:14px}
+.infocols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media (max-width:860px){.infocols{grid-template-columns:1fr}}
+.infocols h4{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--brand);margin-bottom:6px}
+.infocols p,.infocols li{font-size:.93rem;color:var(--ink2);margin:0 0 6px}.infocols ol,.infocols ul{margin:0;padding-left:1.15rem}
+.infocols p b{color:var(--ink)}
+.infoclose{margin-top:8px}
 /* footer */
 footer{margin-top:30px;background:var(--brand-deep);color:#E4D3F2;border-top:4px solid var(--gold);font-size:.9rem}
 footer .wrap{padding-block:22px;display:grid;gap:8px}
 footer a{color:var(--gold)}footer b{color:#fff}
 @media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-@media print{.mast .btn,.tabs,.noprint,.chips,footer{display:none!important}section[role=tabpanel]{display:none!important}section.on{display:block!important}body{background:#fff;color:#000}.mast{background:#fff;color:#000;border-bottom:2px solid #000}.mast *{color:#000!important}.card,details{break-inside:avoid;box-shadow:none}.pick{background:#fff;color:#000;border:2px solid #000}.pick *{color:#000!important}}
+@media print{.mast .btn,.tabs,.tabinfo,.noprint,.chips,footer{display:none!important}section[role=tabpanel]{display:none!important}section.on{display:block!important}body{background:#fff;color:#000}.mast{background:#fff;color:#000;border-bottom:2px solid #000}.mast *{color:#000!important}.card,details{break-inside:avoid;box-shadow:none}.pick{background:#fff;color:#000;border:2px solid #000}.pick *{color:#000!important}}
 </style>
 </head>
 <body>
@@ -165,6 +180,7 @@ footer a{color:var(--gold)}footer b{color:#fff}
 <div class="tabs"><div class="wrap"><nav role="tablist" aria-label="Sections" id="tabs"></nav></div></div>
 <div class="wrap">
 <main id="main">
+<div class="tabinfo" id="info-finder"></div><div class="tabinfo" id="info-licence"></div><div class="tabinfo" id="info-bank"></div><div class="tabinfo" id="info-world"></div><div class="tabinfo" id="info-about"></div>
 <section role="tabpanel" id="p-finder"></section>
 <section role="tabpanel" id="p-licence"></section>
 <section role="tabpanel" id="p-bank"></section>
@@ -195,17 +211,54 @@ $("#themeBtn").onclick = () => {
 
 /* ---------------- tabs ---------------- */
 const TABS = [["finder","Model Finder"],["licence","Licence Guide (UK)"],["bank","Biobank Guide (UK)"],["world","Other regulations"],["about","About"]];
+const TAB_INFO = {
+ finder:{tip:"Find the least animal-dependent model that can answer a research question",
+  title:"About the Model Finder",
+  what:"<p>Helps you choose the <b>least sentient model that can genuinely answer your research question</b>. It ranks eleven model types on a replacement ladder, from computer models and human cells up to protected animals, and highlights the lowest rung that is adequate.</p><p>It covers all three Rs: <b>Replacement</b> (the ladder), <b>Reduction</b> (sample size) and <b>Refinement</b> (welfare checklist).</p>",
+  how:"<ol><li>Click an example, or write your question and pick a research area.</li><li>Tick what the question genuinely needs (human biology, a whole organism, behaviour and so on).</li><li>Read the recommended model, the robustness rating and the ladder.</li><li>Size the study, then tick the refinements you will use.</li><li>Copy or download the 3Rs justification for your project plan or AWERB.</li></ol>",
+  know:"<ul><li>Scores are author judgement and not yet expert-reviewed. You can change any score and give a reason; the change appears in the export.</li><li><b>Robustness</b> shows how often the answer survives one-point scoring errors. Low means a close call.</li><li>Nothing you type is stored or sent anywhere.</li></ul>"},
+ licence:{tip:"A step-by-step guide to UK animal research licences",
+  title:"About the Licence Guide",
+  what:"<p>A plain-English guide for researchers who are <b>new to in vivo work in the UK</b> and may feel daunted by the rules under the Animals (Scientific Procedures) Act 1986 (ASPA).</p><p>It tells you whether your work needs a licence, which personal licence category and training modules apply, and who to talk to.</p>",
+  how:"<ol><li><b>Do I need a licence?</b> Answer a few plain questions about species, life stage and what you will do.</li><li><b>Which personal licence?</b> Tick the techniques you will perform to see your category (A to D) and modules.</li><li><b>Who do I talk to?</b> See what each Named Person and the AWERB can help with.</li><li><b>Ready to submit?</b> Work through the checklist.</li></ol>",
+  know:"<ul><li>UK only. Other countries are in the Other regulations tab.</li><li>A learning aid based on Home Office guidance, not legal advice. Your Named Persons and the Home Office have the final word.</li><li>The full Streamlit app also builds a Word preparation sheet and non-technical summary drafts.</li></ul>"},
+ bank:{tip:"Approvals and questions for using human tissue, cells and biobank samples",
+  title:"About the Biobank Guide",
+  what:"<p>Human tissue and cells are often the best <b>replacement for animals</b>, but they have their own rules about consent, ethics and storage. This guide shows which approvals apply to the material you plan to use.</p><p>It also lists the questions to ask a biobank about collection, freezing, storage and thawing, because a sample is only useful if it is ethically sourced, approved and still functional after thawing.</p>",
+  how:"<ol><li>Pick the material (tissue, cell line, embryonic stem cell line, DNA or RNA, animal tissue).</li><li>Say where it comes from and tick any extra conditions (identifiable data, donors who have died, use in patients, genetic modification).</li><li>Read what approvals and checks apply, then use the questions before you order.</li></ol>",
+  know:"<ul><li>Covers England, Wales and Northern Ireland under the Human Tissue Act 2004. Scotland has its own Act.</li><li>A learning aid, not legal advice. Ask your HTA Designated Individual and ethics committee.</li></ul>"},
+ world:{tip:"Short notes on animal research regulation in the EU, US and OECD/ICH",
+  title:"About Other regulations",
+  what:"<p>Short orientation notes for researchers working <b>outside the UK</b>: the EU (Directive 2010/63/EU), the United States (Animal Welfare Act, PHS Policy, IACUC, FDA Modernization Act 2.0) and OECD and ICH data-acceptance rules.</p>",
+  how:"<ol><li>Open the region that applies to you.</li><li>Read what the law covers, what is protected, who authorises work and what it says about alternatives.</li><li>Follow the \"Read next\" pointers to the official sources.</li></ol>",
+  know:"<ul><li>Orientation only, not legal advice. Confirm with your institution's animal welfare body and the competent authority.</li><li>These notes were written from recall and need checking against the official texts; the review date is shown on the page.</li></ul>"},
+ about:{tip:"Method, privacy, limits and how to cite",
+  title:"About 3R Path",
+  what:"<p>3R Path (Pathway to the 3Rs) is an open-source decision aid for researchers, Named Persons and ethical review bodies. This tab explains how the scores and calculators work, what the tool cannot do, and how it handles your data.</p>",
+  how:"<ol><li>Read the Method section to see how recommendations and robustness are calculated.</li><li>Check Privacy before you enter study details.</li><li>Use the citation and the issue link to cite the tool or report a wrong score or reference.</li></ol>",
+  know:"<ul><li>It supports discussion and does not replace Named Persons, the NVS, the AWERB, a statistician, the HTA or the Home Office.</li><li>It runs in your browser, with no server, analytics or cookies.</li></ul>"}
+};
+const openInfo = {};
+function buildInfo(id){
+  const t=TAB_INFO[id], box=$("#info-"+id);
+  box.innerHTML=`<button type="button" class="infobtn" aria-expanded="false" aria-controls="ip-${id}"><span class="i" aria-hidden="true">i</span><span class="lbl2">About this tab</span><svg class="chev" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 5l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <div class="infopanel" id="ip-${id}" hidden><h3>${t.title}</h3><div class="infocols"><div><h4>What it does</h4>${t.what}</div><div><h4>How to use it</h4>${t.how}</div><div><h4>Good to know</h4>${t.know}</div></div><button type="button" class="btn alt infoclose">Close</button></div>`;
+  const btn=$(".infobtn",box), panel=$(".infopanel",box);
+  const set=o=>{ openInfo[id]=o; btn.setAttribute("aria-expanded",o); panel.hidden=!o; $(".lbl2",btn).textContent=o?"Hide tab information":"About this tab"; };
+  btn.onclick=()=>set(panel.hidden); $(".infoclose",box).onclick=()=>{set(false); btn.focus();};
+  box.addEventListener("keydown",e=>{ if(e.key==="Escape"&&!panel.hidden){ set(false); btn.focus(); } });
+}
 const tabs = $("#tabs");
 TABS.forEach(([id,label],i) => {
   const b = document.createElement("button");
-  b.type="button"; b.role="tab"; b.id="t-"+id; b.textContent=label; b.setAttribute("aria-controls","p-"+id);
+  b.type="button"; b.role="tab"; b.title=TAB_INFO[id].tip; b.id="t-"+id; b.textContent=label; b.setAttribute("aria-controls","p-"+id);
   b.onclick = () => show(id); b.onkeydown = e => {
     if (e.key==="ArrowRight"||e.key==="ArrowLeft"){ const n=(i+(e.key==="ArrowRight"?1:TABS.length-1))%TABS.length; show(TABS[n][0]); $("#t-"+TABS[n][0]).focus(); }
   };
   tabs.append(b);
 });
 function show(id){
-  TABS.forEach(([t]) => { const on=t===id; $("#t-"+t).setAttribute("aria-selected",on); $("#t-"+t).tabIndex=on?0:-1; $("#p-"+t).classList.toggle("on",on); });
+  TABS.forEach(([t]) => { const on=t===id; $("#t-"+t).setAttribute("aria-selected",on); $("#t-"+t).tabIndex=on?0:-1; $("#p-"+t).classList.toggle("on",on); $("#info-"+t).classList.toggle("on",on); });
   try{ history.replaceState(null,"","#"+id); }catch(e){}
 }
 
@@ -505,7 +558,7 @@ function renderAbout(){
   <h3>References</h3><ul>${D.references.map(r=>`<li>${esc(r)}</li>`).join("")}</ul></div>`;
 }
 
-finderShell(); renderFinder(); renderLicence(); renderBank(); renderWorld(); renderAbout();
+TABS.forEach(([id])=>buildInfo(id)); finderShell(); renderFinder(); renderLicence(); renderBank(); renderWorld(); renderAbout();
 show(TABS.some(t=>"#"+t[0]===location.hash)?location.hash.slice(1):"finder");
 </script>
 </body>
