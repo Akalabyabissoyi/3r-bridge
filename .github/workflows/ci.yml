@@ -21,6 +21,7 @@ jobs:
       - run: pip install -e ".[dev]"
       - run: ruff check .
       - run: pytest -q
+      - run: python scripts/build_html.py && git diff --exit-code -- 3r-bridge.html docs/index.html
   docker:
     runs-on: ubuntu-latest
     steps:

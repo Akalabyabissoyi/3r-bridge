@@ -5,7 +5,8 @@
 
 **Choose, preserve and justify the least sentient model that can answer a research question.**
 
-> **Live demo:** see [docs/DEPLOY.md](docs/DEPLOY.md) to publish one in two minutes, then put its link here. &nbsp;
+> **Use it now, no install:** download [`3r-bridge.html`](3r-bridge.html) (one file, works offline, nothing is sent anywhere) and double-click it. &nbsp;
+> **Host it:** see [docs/DEPLOY.md](docs/DEPLOY.md) (GitHub Pages serves `docs/index.html`). &nbsp;
 > **Cite:** see [CITATION.cff](CITATION.cff) (Zenodo DOI after the first release).
 
 **Who is it for?** Researchers planning an animal or non-animal study, Named Persons and AWERB members reviewing one, and
@@ -65,6 +66,10 @@ The Biobank Guide came out of the SLTB 2026 pre-conference mini-symposium at BIO
 ![Biobank Guide: what applies to human tissue, cells and biobank samples](docs/biobank_guide.png)
 
 ## Run it
+
+**Easiest:** open `3r-bridge.html` in any modern browser. It contains the Model Finder, Licence Guide, Biobank Guide and regulation notes, with Markdown, JSON and print/PDF export. (The Word export, preparation sheet and non-technical summary builder are in the Streamlit app below.) Regenerate it after changing data with `python scripts/build_html.py`.
+
+**Full app:**
 
 ```bash
 git clone https://github.com/Akalabyabissoyi/3r-bridge.git

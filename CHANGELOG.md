@@ -5,6 +5,7 @@ All notable changes are listed here. The catalogue (`bridge/data/models.json`) i
 ## 0.2.0 - 2026-10-05
 
 ### Added
+- `3r-bridge.html`: a single-file, offline, no-install web version (Model Finder, Licence Guide, Biobank Guide, regulations), built by `scripts/build_html.py` from the same Python data; parity with the Python package is checked by `scripts/verify_web.js` and `tests/test_web.py`.
 - Catalogue moved to versioned data (`bridge/data/models.json`) with supporting literature and a review record per model.
 - Sample-size calculators for paired, ANOVA, proportions and survival designs; unequal groups, rank-based allowance and attrition.
 - Editable scores with a recorded reason, and a robustness check showing how stable a recommendation is.
