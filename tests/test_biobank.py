@@ -25,3 +25,8 @@ def test_patients_switch_regime():
 
 def test_deceased_consent_flagged():
     assert any("died" in n for n in biobank_verdict("human_tissue", "rtb", deceased=True)[2])
+
+
+def test_hesc_and_patient_use_paths_return_levels():
+    assert biobank_verdict("hesc")[1] in {"conditions", "licence", "none"}
+    assert biobank_verdict("human_tissue", patients=True)[1] == "licence"

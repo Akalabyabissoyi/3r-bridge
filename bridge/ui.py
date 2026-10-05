@@ -13,7 +13,7 @@ CSS = """
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap');
 
 :root{
-  --paper:#F5F7F6; --card:#FFFFFF; --ink:#18322E; --ink-2:#4B605B; --ink-3:#7C8C88;
+  --paper:#F5F7F6; --card:#FFFFFF; --ink:#18322E; --ink-2:#4B605B; --ink-3:#566763;
   --spruce:#1F6F63; --mint:#CFE6DD; --amber:#E2A33A; --amber-soft:#FBE9C6;
   --lilac:#8C7CE0; --lilac-soft:#ECE8FD; --line:#DCE3E0; --unsuit:#C9D1CE;
 }
@@ -151,6 +151,11 @@ div[data-testid="stExpander"]{ background:var(--card); border-radius:14px; }
 .rb-find b{ display:block; font-family:'Bricolage Grotesque', sans-serif; }
 .rb-find span{ font-size:.92rem; color:var(--ink-2); }
 @media (max-width:760px){ .rb-asks{ grid-template-columns:1fr; } }
+
+/* accessibility: visible keyboard focus and no motion for people who ask for none */
+a:focus-visible, button:focus-visible, [role="tab"]:focus-visible, input:focus-visible, textarea:focus-visible,
+select:focus-visible, [tabindex]:focus-visible{ outline:3px solid var(--spruce) !important; outline-offset:2px; }
+@media (prefers-reduced-motion: reduce){ *, *:before, *:after{ animation:none !important; transition:none !important; scroll-behavior:auto !important; } }
 </style>
 """
 

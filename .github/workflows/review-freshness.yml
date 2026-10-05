@@ -1,0 +1,30 @@
+name: Review freshness
+on:
+  schedule:
+    - cron: "0 7 1 * *"   # first of each month
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install numpy scipy statsmodels python-docx
+      - id: stale
+        run: |
+          set +e
+          python scripts/check_staleness.py 180 | tee stale.txt
+          echo "code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+      - if: steps.stale.outputs.code != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create --repo "$GITHUB_REPOSITORY" \
+            --title "Regulatory text and catalogue scores need review" \
+            --label "maintenance" \
+            --body "$(printf 'These items were last reviewed more than 180 days ago:\n\n%s\n\nSee docs/EXPERT_REVIEW.md.' "$(cat stale.txt)")" || true

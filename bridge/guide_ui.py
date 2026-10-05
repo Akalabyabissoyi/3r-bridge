@@ -11,9 +11,29 @@ from docx.shared import Pt, RGBColor
 from . import ui
 from .catalogue import TIER_NAMES
 from .examples import CREDIT, EXAMPLES, SOURCE_PAGE, SOURCE_URL
-from .licence import (CATEGORY_TEXT, CHECKLIST, CHECKLIST_PIL, ENDPOINTS, EXAMPLES_NOT_REGULATED, EXAMPLES_REGULATED,
-                      GLOSSARY, JOURNEY, MODULES, NAMED_PERSONS, NTS, SEVERITY, SPECIES, STEP_STAGE, SUBJECTS,
-                      TECHNIQUES, WORRIES, licence_verdict, modules_for, pil_categories, readability)
+from .licence import (
+    CATEGORY_TEXT,
+    CHECKLIST,
+    CHECKLIST_PIL,
+    ENDPOINTS,
+    EXAMPLES_NOT_REGULATED,
+    EXAMPLES_REGULATED,
+    GLOSSARY,
+    JOURNEY,
+    MODULES,
+    NAMED_PERSONS,
+    NTS,
+    SEVERITY,
+    SPECIES,
+    STEP_STAGE,
+    SUBJECTS,
+    TECHNIQUES,
+    WORRIES,
+    licence_verdict,
+    modules_for,
+    pil_categories,
+    readability,
+)
 
 STEPS = ["1. Do I need a licence?", "2. Which licence and training?", "3. Who can help me?",
          "4. Prepare my application", "5. Ready to submit?"]
@@ -54,7 +74,9 @@ def _prefill(results, choice, ss, refinements):
         "guidance": "PREPARE guidelines for planning, ARRIVE 2.0 for reporting, NC3Rs resources, and LASA guidance on good practice.",
         "informed": "Through the establishment's Named Information Officer, NC3Rs newsletters and events, and local 3Rs seminars.",
     }
-    if ss:
+    if ss and ss.get("text"):
+        text["numbers"] = "We used a power calculation. " + ss["text"]
+    elif ss:
         text["numbers"] = (f"We used a power calculation: to detect a difference of {ss['diff']} with a standard deviation "
                            f"of {ss['sd']}, at a significance level of {ss['alpha']} and {ss['power']:.0%} power, "
                            f"we need {ss['n']} animals per group.")

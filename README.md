@@ -1,6 +1,17 @@
 # 3R Bridge
 
+[![CI](https://github.com/Akalabyabissoyi/3r-bridge/actions/workflows/ci.yml/badge.svg)](https://github.com/Akalabyabissoyi/3r-bridge/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
 **Choose, preserve and justify the least sentient model that can answer a research question.**
+
+> **Live demo:** see [docs/DEPLOY.md](docs/DEPLOY.md) to publish one in two minutes, then put its link here. &nbsp;
+> **Cite:** see [CITATION.cff](CITATION.cff) (Zenodo DOI after the first release).
+
+**Who is it for?** Researchers planning an animal or non-animal study, Named Persons and AWERB members reviewing one, and
+biobank and cryopreservation scientists who want validated non-animal models to be shared instead of rebuilt.
+**What does it give you?** A transparent, referenced recommendation with a robustness check, a sample size, a refinement checklist and an
+export (Markdown, Word, JSON) you can attach to a project plan, grant or AWERB submission. Nothing you type is stored.
 
 3R Bridge is a small interactive tool for researchers, Named Persons and ethical review bodies. It has three parts:
 
@@ -59,16 +70,53 @@ The Biobank Guide came out of the SLTB 2026 pre-conference mini-symposium at BIO
 git clone https://github.com/Akalabyabissoyi/3r-bridge.git
 cd 3r-bridge
 python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
+pip install -e ".[app]"
 streamlit run app.py
 ```
 
-Run the tests with `pytest`.
+Or with Docker: `docker build -t 3r-bridge . && docker run -p 8501:8501 3r-bridge`.
+
+### Command line and Python
+
+```bash
+python -m bridge find --area sensory --need organism --need behaviour --format markdown
+python -m bridge samplesize anova --effect-f 0.25 --groups 4 --dropout 0.1
+```
+
+```python
+from bridge.finder import assess, lowest_adequate, robustness
+res = assess("hepatotox", ["human"])
+print(lowest_adequate(res)["name"], robustness("hepatotox", ["human"])["label"])
+```
+
+Run the tests and linter with `pip install -e ".[dev]" && pytest && ruff check .`.
+
+## What is new in 0.2
+
+Referenced and versioned catalogue (`bridge/data/models.json`), editable scores with recorded reasons, a robustness check on every
+recommendation, five study designs with unequal groups and attrition, Word and JSON exports, EU/US/OECD orientation notes,
+a command-line interface, CI, a Dockerfile and a [changelog](CHANGELOG.md).
+
+## Limitations
+
+The scores are author judgements until the [expert review](docs/EXPERT_REVIEW.md) is complete, the catalogue is small, regulatory notes are
+summaries, and the Licence Guide covers the UK only. See [docs/METHODOLOGY.md](docs/METHODOLOGY.md).
+
+## FAQ
+
+**Is the answer a recommendation I can rely on?** No. It starts a conversation with your Named Persons, AWERB, statistician and regulator.
+**Is my data stored?** No: see [docs/PRIVACY.md](docs/PRIVACY.md).
+**A score or reference is wrong.** Please open an [evidence issue](https://github.com/Akalabyabissoyi/3r-bridge/issues/new?template=score_evidence.yml); see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Contributing and community
+
+Contributions of evidence, models and jurisdictions are welcome: [CONTRIBUTING.md](CONTRIBUTING.md), [Code of Conduct](CODE_OF_CONDUCT.md),
+[roadmap](docs/ROADMAP.md). Accessibility notes are in [docs/ACCESSIBILITY.md](docs/ACCESSIBILITY.md).
 
 ## Roadmap
 
-- More model types (for example precision-cut lung slices, iPSC-derived neurons) and user-editable scores.
-- Example worked applications for common study types.
+See [docs/ROADMAP.md](docs/ROADMAP.md): expert review, more model types (precision-cut lung slices, iPSC neurons),
+more jurisdictions, worked applications for common study types, a Zenodo DOI and a paper.
 
 ## Important
 
